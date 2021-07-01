@@ -1,4 +1,6 @@
+import 'dart:convert';
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -6,27 +8,20 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String username;
+  String username = "kikiu";
 
 // Async - Function start but return same delayed
 //Future.delayed - Function start after some delayed
 
   void getData() async {
-    //process
-    await Future.delayed(Duration(seconds: 5), () {
-      username = "Piyush";
-    });
-    print("$username");
-  }
-
-  void showData() {
-    print("$username");
+    //Get data
+    Response response = await get(Uri.https('api.openweathermap.org', 'data/2.5/weather?q=Indore&appid=cf82a9601f77374adfcf7bfa96d3a0b5')),
+   // print(response.body);
   }
 
   void initStatee() {
     super.initState();
     getData();
-    showData();
     print("this is init state");
   }
 
