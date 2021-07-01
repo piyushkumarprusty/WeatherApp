@@ -6,13 +6,17 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
-  String username = "Piyush";
+  String username;
 
-  void getData() {
+// Async - Function start but return same delayed
+//Future.delayed - Function start after some delayed
+
+  void getData() async {
     //process
-    Future.delayed(Duration(seconds: 5), () {
-      print("$username ");
+    await Future.delayed(Duration(seconds: 5), () {
+      username = "Piyush";
     });
+    print("$username");
   }
 
   void showData() {
