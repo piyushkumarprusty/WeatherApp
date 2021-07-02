@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 
@@ -8,6 +7,7 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  int counter = 1;
   String username = "kikiu";
 
 // Async - Function start but return same delayed
@@ -15,8 +15,9 @@ class _HomeState extends State<Home> {
 
   void getData() async {
     //Get data
-    Response response = await get(Uri.https('api.openweathermap.org', 'data/2.5/weather?q=Indore&appid=cf82a9601f77374adfcf7bfa96d3a0b5')),
-   // print(response.body);
+    Response response = await get(Uri.https('api.openweathermap.org',
+        'data/2.5/weather?q=Indore&appid=cf82a9601f77374adfcf7bfa96d3a0b5'));
+    // print(response.body);
   }
 
   void initStatee() {
@@ -26,12 +27,29 @@ class _HomeState extends State<Home> {
   }
 
   @override
+  void setState(VoidCallback fn) {
+    // TODO: implement setState
+    super.setState(fn);
+    print("setstate called");
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       //body: Text("Home Activity"),
 
       appBar: AppBar(
         title: Text("Home Activity"),
+      ),
+      body: Column(
+        children: [
+          FloatingActionButton(
+            onPressed: () => setState(() {
+              counter += 1;
+            }),
+          ),
+          Text("$counter"),
+        ],
       ),
     );
   }
